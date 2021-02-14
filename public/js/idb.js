@@ -25,7 +25,7 @@ request.onerror = function(event){
 
 // function if submit transaction and no internet
 function saveRecord(record) {
-    
+    alert("offline transaction, will be uploaded later")
     // open up a new db R/W transaction
     const transaction = db.transaction(['transaction'], 'readwrite');
 
@@ -87,5 +87,16 @@ function uploadTransactions(){
 }
 
 
+
 // listen for app coming back online
 window.addEventListener('online', uploadTransactions);
+
+// addEventListener version
+//window.addEventListener('offline', (event) => {
+//    console.log("The network connection has been lost.");
+//});
+
+// onoffline version
+window.onoffline = (event) => {
+    alert("The network connection has been lost \n Transactions will be updated when connection is up again");
+  };
